@@ -1,0 +1,103 @@
+<div class="title-hd">
+    <h2>on tv</h2>
+    <a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
+</div>
+<div class="tabs">
+    <ul class="tab-links-2">
+        <li class="active"><a href="#tab21 active">#Popular</a></li>
+        <li ><a href="#tab22"> #Airing today</a></li>
+        <li><a href="#tab23">  #Top rated  </a></li>                     
+    </ul>
+    <div class="tab-content">
+        <div id="tab21" class="tab  active">
+            <div class="row">
+                <div class="slick-multiItem">
+                    {% for m in tvpopular %}
+                    <div class="slide-it">
+                        <div class="movie-item">
+                            <div class="mv-img">
+                                <img src="https://image.tmdb.org/t/p/w400{{m.image}}" class="poster" alt="...">
+                            </div>
+                            <div class="hvr-inner">
+                            {% if user.is_authenticated %}
+                                <a  href="{% url 'tvpopular' m.id %}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                            {% else %}
+                            <a  href="#" class="loginLink"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                            {% endif %}
+                            </div>
+                            <div class="title-in">
+                                {% if not m.name %}
+                                    <h6 class="card-title"><a href="#">{{ m.title }}</a></h6>
+                                {% else %}
+                                    <h6 class="card-title"><a href="#">{{ m.name }}</a></h6>
+                                {% endif %}
+                                <p><i class="ion-android-star"></i><span>{{m.rating}}</span> /10</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="tab22" class="tab">
+           <div class="row">
+            <div class="slick-multiItem">
+                {% for m in tvairingtoday %}
+                <div class="slide-it">
+                    <div class="movie-item">
+                        <div class="mv-img">
+                            <img src="https://image.tmdb.org/t/p/w400{{m.image}}" class="poster" alt="...">
+                        </div>
+                        <div class="hvr-inner">
+                        {% if user.is_authenticated %}
+                            <a  href="{% url 'tvairingtoday' m.id %}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                        {% else %}
+                        <a  href="#" class="loginLink"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                        {% endif %}
+                        </div>
+                        <div class="title-in">
+                            {% if not m.name %}
+                                <h6 class="card-title"><a href="#">{{ m.title }}</a></h6>
+                            {% else %}
+                                <h6 class="card-title"><a href="#">{{ m.name }}</a></h6>
+                            {% endif %}
+                            <p><i class="ion-android-star"></i><span>{{m.rating}}</span> /10</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
+        <div id="tab23" class="tab">
+            <div class="row">
+                <div class="slick-multiItem">
+                    {% for m in tvtoprated %}
+                    <div class="slide-it">
+                        <div class="movie-item">
+                            <div class="mv-img">
+                                <img src="https://image.tmdb.org/t/p/w400{{m.image}}" class="poster" alt="...">
+                            </div>
+                            <div class="hvr-inner">
+                            {% if user.is_authenticated %}
+                                <a  href="{% url 'tvtoprated' m.id %}"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                            {% else %}
+                                <a  href="#" class="loginLink"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                            {% endif %}
+                            </div>
+                            <div class="title-in">
+                                {% if not m.name %}
+                                    <h6 class="card-title"><a href="#">{{ m.title }}</a></h6>
+                                {% else %}
+                                    <h6 class="card-title"><a href="#">{{ m.name }}</a></h6>
+                                {% endif %}
+                                <p><i class="ion-android-star"></i><span>{{m.rating}}</span> /10</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+    </div>
+</div>

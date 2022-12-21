@@ -1,0 +1,40 @@
+{% extends "back/base.html" %}
+{% block content %}
+<p class="mb-4"></p>
+<body class="p-4">
+    <div class="container-fluid col-12 rounded-1 shadow-lg fst-italic bg-tranparent p-4">
+    <br>
+    {% if user.is_staff%}
+    <a href="{% url 'berita' %}" class="btn btn-primary mb-4">back</a>
+    {% else %}
+    <a href="{% url 'beritaartikel' %}" class="btn btn-primary mb-4">back</a>
+    {% endif %}
+    <br>
+    <div class="tengah">
+        <img src="{{ artikel.cover.url }}" alt="" width="40%" height="100%">
+    </div>
+        <h1 class="text-center">{{artikel.judul}}</h1>
+        <div class="container col-4 rounded-4">
+            <table class="table table-light table-striped">
+                <tr>
+                    <td >Kategory</td>
+                    <td>:</td>
+                    <td>{{artikel.kategori}}</td>
+                </tr>
+                <tr>
+                    <td >Tanggal</td>
+                    <td>:</td>
+                    <td>{{artikel.date}}</td>
+                </tr>
+              
+        </table>
+       
+        </div>
+        <span>
+            <p class="isi">
+                {{artikel.isi}}
+            </p>
+        </span> 
+    </div>
+</body>
+{% endblock content %}

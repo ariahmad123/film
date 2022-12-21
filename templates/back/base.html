@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Responsiive Admin Dashboard | CodingLab </title>
+    <link rel="stylesheet" href="{% static 'back/css/inti.css' %}">
+    <link rel="stylesheet" href="{% static 'back/css/swiper1-bundle.min.css' %}">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="sweetalert2.min.css">
+        <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'back/css/artikelcard.css' %}">
+    <link rel="stylesheet" href="{% static 'back/css/bookhero.css' %}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body class="fst-italic ">
+    <div class="sidebar open">
+      <div class="logo-details">
+        <i class='bx bxl-c-plus-plus'></i>
+        <span class="logo_name">CodingLab</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          {% comment %} sesion admin {% endcomment %}
+          {% if request.session.is_operator == 'operator'%}
+          <a href="{% url 'index' %}">
+            <i class='bi bi-speedometer2' ></i>
+            <span class="link_name">Dashboard</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Dashboard</a></li>
+          </ul>
+        </li>
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class='bi bi-upload' ></i>
+              <span class="link_name">Posts</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow' ></i>
+          </div>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'berita' %}">Tabel artikel</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'user' %}">
+            <i class='bi bi-book-half' ></i>
+            <span class="link_name">Table User</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Table User</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'beritaartikel' %}">
+            <i class='bi bi-browser-safari' ></i>
+            <span class="link_name">Artikel</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Artikel</a></li>
+          </ul>
+        </li>
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class='bi bi-upload' ></i>
+              <span class="link_name">Posts Sinkron</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow' ></i>
+          </div>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'trending' %}">Trending Sinkron</a></li>
+          </ul>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'popular' %}">Popular Sinkron</a></li>
+          </ul>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'upcoming' %}">Upcoming movie Sinkron</a></li>
+          </ul>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'toprated' %}">toprated movie Sinkron</a></li>
+          </ul>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'tvpopular' %}">tv popular Sinkron</a></li>
+          </ul>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'tvtoprated' %}">tv toprated Sinkron</a></li>
+          </ul>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'tvairingtoday' %}">tv airingtodaymovie Sinkron</a></li>
+          </ul> 
+        </li>
+        {% else %}
+        {% comment %} sesion {% endcomment %}
+        <a href="{% url 'index' %}">
+          <i class='bi bi-speedometer2' ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Dashboard</a></li>
+        </ul>
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+              <i class='bi bi-upload' ></i>
+              <span class="link_name">Posts</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow' ></i>
+          </div>
+          <ul class="sub-menu">
+            <li><a class="link_name" href="#">Posts</a></li>
+            <li><a href="{% url 'berita' %}">Tabel artikel</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'beritaartikel' %}">
+            <i class='bi bi-browser-safari' ></i>
+            <span class="link_name">Artikel</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Artikel</a></li>
+          </ul>
+        </li>
+        
+        {% endif %}
+        <li>
+      <div class="profile-details">
+        <div class="profile-content">
+          <img src="{% static 'back/image/profile.jpg' %}" alt="profileImg">
+        </div>
+        <div class="name-job">
+          {% if request.user.is_staff %}
+          <div class="profile_name">{{ request.user.username }}</div>
+          <div class="job">ADMINISTRATOR</div>
+          {% else %}
+          <div class="profile_name">{{ request.user.username|truncatechars:7 }}</div>
+          <div class="job">USER</div>
+          {% endif %} 
+        </div>
+        <a href="{% url 'home' %}"><i class='bx bx-log-out' ></i>
+        </a>
+      </div>
+    </li>
+    
+  </ul>
+    </div>
+    <section class="home-section">
+    <nav class="navbar bg-tranparent shadow-lg rounded-4 fst-italic mb-2 bg-light garis">
+      <div class="container-fluid home-content">
+        <i class='bx bx-menu' ></i>
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock content %}
+  </section>
+</body>
+{% for msg in messages%}
+{% if msg.tags == 'error' %}
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '{{ msg }}',
+  })
+</script>
+{% else %}
+<script>
+  Swal.fire(
+  '{{ msg }}',
+  'You clicked the button!',
+  'success'
+)
+</script>
+{% endif %}
+{% endfor %}
+<script src="sweetalert2.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'back/js/baru.js' %}"></script>
+<script src="{% static 'back/js/Chart.js'%}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</html>

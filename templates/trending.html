@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="social-link">
+            <p>Follow us: </p>
+            <a href="#"><i class="ion-social-facebook"></i></a>
+            <a href="#"><i class="ion-social-twitter"></i></a>
+            <a href="#"><i class="ion-social-googleplus"></i></a>
+            <a href="#"><i class="ion-social-youtube"></i></a>
+        </div>
+        <div  class="slick-multiItemSlider">
+            {% for m in data %}
+            <div class="hero-container">
+                <div class="main-container">
+                    <div class="poster-container">
+                        {% if m.image %}
+                        <img src="https://image.tmdb.org/t/p/w500{{m.image}}" alt="{{m.title}}">
+                        {% else %}
+                        <img src="https://via.placeholder.com/500x750" alt="{{m.title}}">
+                        {% endif %}
+                    </div>
+                    <div class="ticket-container">
+                        <div class="ticket__content">
+                            {% if not m.name %}
+                                <h5 class="card-title">{{ m.title }}</h5>
+                            {% else %}
+                                <h5 class="card-title">{{ m.name }}</h5>
+                            {% endif %}
+                            <p class="ticket__movie-slogan">
+                                {{ m.overview|truncatechars:150}}
+                            </p>
+                            {% comment %} button view api function id{% endcomment %}
+                            {% if user.is_authenticated%}
+                            <button class="ticket__buy-btn"><a href="{% url 'view_trendings_results' m.id %}" class="btn btn-primary">View</a></button>
+                            {% else %}
+                            <button class="ticket__buy-btn loginLink"><a href="#" class="btn btn-primary">View</a></button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="login-wrapper" id="Login">
+            
+            <p>Username</p>
+        </div>
+    </div>
+</div>

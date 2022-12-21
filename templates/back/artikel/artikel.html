@@ -1,0 +1,152 @@
+{% extends "back/base.html" %}
+{% block content %}
+<p class="mb-4"></p>
+<link rel="stylesheet" href="sweetalert2.min.css">
+<body class="">
+    <div class="container-fluid col-12 rounded-1 shadow-lg fst-italic bg-tranparent garis">
+    <br>
+    <br>
+    <h1 class=" text-center ">Data Artikel</h1>
+    <div class="container-fluid">
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-success me-2"  data-bs-toggle="modal" data-bs-target="#tambah">
+  Tambah
+</button>
+    <div class="row g-3 align-item-center mt-2">
+    <div class="col-auto">
+    <form class="d-flex " role="search" action="/pegawai" method="GET">
+      <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+    </form>
+    </div>
+    <div class="col-auto">
+    <!-- <a class="btn btn-danger me-2" href="/exportpdf">Export PDF</a> -->
+    </div>
+    </div>
+    <div class="row1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col">#</th>
+              <th class="col">Nama</th>
+              <th class="col">Judul</th>
+              <th class="col-1">cover</th>
+              <th class="col-1">Isi</th>
+              <th class="col">Kategory</th>
+              <th class="col">Di buat</th>
+              <th class="col-4"><center>Opsi</center></th>
+            </tr>
+          </thead>
+          <br>
+          <tbody>
+            {% for a in artikel %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{a.nama}}</td>
+              <td>{{a.judul|truncatechars:50}}</td>
+              {% if a.cover %}
+              <td>
+                  <img src="{{a.cover.url}}" width="100px" height="100px">
+                </td>
+              {% endif %}
+              <td>{{a.isi|truncatechars:50}}</td>
+              <td><span class="badge bg-success">{{a.kategori}}</span></td>
+              <td>{{a.date}}</td>
+              <td>
+                <center>
+                <a href="{% url 'lihat_artikel' a.id %}" class="btn btn-success col-2 bi bi-eye"></a>
+                <a href="{% url 'edit_artikel' a.id %}"  class="btn btn-primary col-2 bi bi-pencil"></a>
+                <a href="{% url 'delete_artikel' a.id %}"class="btn btn-danger col-2 bi bi-trash delete" data-id="" data-nama=""></a> 
+                </center>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Judul Artikel</label>
+                <input type="text" class="form-control" name="judul">
+              </div>
+              {% comment %} <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">gambar sampul</label>
+                <input type="file" class="form-control" name="image">
+              </div> {% endcomment %}
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">cover</label>
+                <input type="file" class="form-control" name="cover">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Isi</label>
+                <textarea name="isi" id="" cols="30" rows="10"  class="form-control"></textarea>
+              </div>
+              <label for="exampleInputPassword1" class="form-label">Kategori</label>
+              <div class="input-group mb-3">
+                <select class="form-select" name="kategori" id="inputGroupSelect02">
+                  <option selected>Pilih kategori</option>4
+                  {% for k in kategori %}
+                  <option value="{{k.kategori}}">{{k.kategori}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- {% for a in artikel %}
+    <div class="modal fade " id="edit-{{a.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Judul Artikel</label>
+                <input type="text" class="form-control" name="judul">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Isi</label>
+                <textarea name="isi" id="" cols="30" rows="10"  class="form-control"></textarea>
+              </div>
+              <label for="exampleInputPassword1" class="form-label">Kategori</label>
+              <div class="input-group mb-3">
+                <select class="form-select" name="kategori" id="inputGroupSelect02">
+                  <option selected>Pilih kategori</option>4
+                  {% for k in kategori %}
+                  <option value="{{k.kategori}}">{{k.kategori}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %} -->
+    
+    
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% endblock content %}

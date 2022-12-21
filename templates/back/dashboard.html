@@ -1,0 +1,53 @@
+{% extends "back/base.html" %}
+{% block content %}
+{% load static%}
+
+<body class="color">
+    <header>
+    <nav class="navbar">
+      <div class="content">
+        <div class="icon menu-btn">
+          <i class="fa fa-bars"></i>
+        </div>
+    </nav>
+  </header>
+  <div id="content">
+    <div class="jumbotron">
+      <br><br>
+      <br>
+      <img class="doctor" src="{% static 'back/image/breaking-news.gif' %} ">
+    <br><br><br>
+    <h1>Berita&nbsp&&nbspLibrary</h1>
+  </div>
+</body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+      
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Bebas Neue', cursive;
+}
+.color{
+background-color:#ffff;
+background-image: url("../image/news1.gif");
+/* background-repeat: no-repeat; */
+background-size: 100%;
+background-position-x: center;
+}
+.jumbotron{
+   padding:60px;
+   text-align: center;
+   font-size: 20px;
+   color: white;
+}
+.doctor{
+    padding-top: 20px;
+    width: 20%;
+    height: 100%;
+    /* margin-left: 200px; */
+   }
+
+</style>
+{% endblock content %}

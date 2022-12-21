@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block list %}
+<div class="hero common-hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="hero-ct">
+					<h1> blog listing - list</h1>
+					<ul class="breadcumb">
+						<li class="active"><a href="#">Home</a></li>
+						<li> <span class="ion-ios-arrow-right"></span> blog listing</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- blog list section-->
+<div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+			{% for a in venus %}
+            	<div class="blog-item-style-1 blog-item-style-3">
+                    {% if a.cover %}
+                    <img src="{{a.cover.url}}" width="100px" height="100px">
+                    {% endif %}
+            		<div class="blog-it-infor">
+            			<h3><a href="#">{{a.judul|truncatechars:50}}</a></h3>
+            			<span class="time">{{a.date}}</span>
+            			<p>"Aftermath" is a plane crash movie without a plane crash. Instead, the closest we get is a scene set in the control tower, where a computer screen shows two ...</p>
+            		</div>
+            	</div>
+            {% endfor %}
+            	<ul class="pagination">
+					{% if venus.has_previous %}
+					<li><a href="?page={{ venus.previous_page_number }}" class=" button big previous"><i class="ion-arrow-left-c"></i></a></li>
+					{% else %}
+					<li><a href="#" class="disabled button big previous"><i class="ion-arrow-left-c"></i></a></li>
+					{%endif%}
+					{% for i in venus.paginator.page_range %}
+						{% if venus.number == i %}
+						<li><a href="?page={{ i }}" class="active">{{ i }}</a></li>
+						{% else %}
+						<li><a href="?page={{ i }}">{{ i }}</a></li>
+						{% endif %}
+					{% endfor %}
+
+					{% if venus.has_next %}
+					<li><a href="?page={{ venus.next_page_number }}" class="button big next"><i class="ion-arrow-right-c"></i></a></li>
+					{%else%}
+					<li><a href="#" class="button big next"><i class="ion-arrow-right-c"></i></a></li>
+					{%endif%}
+
+            	</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

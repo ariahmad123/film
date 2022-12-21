@@ -1,0 +1,57 @@
+{% extends "back/base.html" %}
+{% block content %}
+<p class="mb-4"></p>
+<body>
+    <div class="container col-14 rounded-1 shadow-lg fst-italic bg-tranparent garis">
+    <br>
+    <br>
+    <h1 class=" text-center ">Data Pengguna</h1>
+    <div class="container-fluid">
+    <!-- Button trigger modal -->
+    <div class="row g-3 align-item-center mt-2">
+        <div class="col-auto">
+            <form class="d-flex " role="search" action="/pegawai" method="GET">
+                <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </div>
+    <div class="row1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col">#</th>
+              <th class="col">Username</th>
+              <th class="col">email</th>
+              <th class="col">Nama Depan</th>
+              <th class="col">Nama Belakang</th>
+              <th class="col">status</th>
+              <td>Opsi</td>
+            </tr>
+          </thead>
+          <br>
+          <tbody>
+            {% for a in user %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{a.username}}</td>
+              <td>{{a.email}}</td>
+              <td>{{a.first_name}}</td>
+              <td>{{a.last_name}}</td>
+              <td>
+                {% if a.is_staff%}
+                <span class="badge bg-success">Admin</span>
+                {% else %}
+                <span class="badge bg-danger">User</span>
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'edituser' a.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'deleteuser' a.id %}" class="btn btn-danger">Delete</a>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+    </div>
+</body>
+{% endblock content %}

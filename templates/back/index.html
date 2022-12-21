@@ -1,0 +1,83 @@
+{% extends "back/base.html" %}
+{% block content %}
+{% load static%}
+<body>
+  <div class="container-fluid ">
+    <script type="text/javascript" src="{% static 'back/js/Chart.js' %}"></script>
+    <div class="container2 px-4 mb-4 ">
+    <div class="row gx-4  ">
+      <div class="col">
+       <div class="p-3  rounded-1 container shadow-lg bg-danger text-white garis">
+        <h5 class="bi bi-book-fill"> Jumlah Buku</h5>
+        <div class="span">{{buku.count}}&nbsp Buku</div>
+       </div>
+      </div>
+      <div class="col">
+        <div class="p-3  rounded-1 container shadow-lg bg-warning text-white garis">
+        <h5 class="bi bi-newspaper"> Artikel</h5>
+        <div class="span">{{artikel.count}}&nbsp Artikel</div>
+        </div>
+      </div>
+      <div class="col">
+       <div class="p-3  rounded-1 container shadow-lg bg-success text-white garis">
+        <h5 class="bi bi-gender-female">User</h5>
+        <div class="span">{{user.count}}&nbsp User</div>
+       </div>
+      </div>
+      <div class="col">
+        <div class="p-3  rounded-1 container shadow-lg bg-primary text-white garis">
+        <h5 class="bi bi-gender-female">Admin</h5>
+        <div class="span">{{admin.count}}&nbsp orang</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container2 px-4 mt-1 ">
+    <div class="row g-1">
+      <div class="col-12">
+        <div class="p-3  rounded-1 container shadow-lg bg-light garis">
+          <h5 class="text-center">Grafik Perkembangan</h5>
+          <canvas id="myChart" width="900" height="400"></canvas>
+          <div style="width: 50px;height: 50px">
+      <canvas id="myChart"></canvas>
+    </div>
+      </div>
+      <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: ["Buku", "Artikel", "User", "Admin"],
+                datasets: [{
+                    label: '# of Votes',
+                    //data admin user buku artikel
+                    data: [{{buku.count}},{{artikel.count}},{{user.count}}, {{admin.count}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+      </script>
+        </div>
+      </div>
+{% endblock content %}
